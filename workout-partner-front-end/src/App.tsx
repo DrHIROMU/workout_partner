@@ -7,18 +7,13 @@ import {
   getFirestore,
   collection,
   getDocs,
+  addDoc,
   Query,
 } from "firebase/firestore/lite";
 import Excercise from "./model/exercise/excercise";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDmr8q4JuzLV7Xy4YZfF8xj_5fiYvwtUQ8",
-  authDomain: "workoutpartner-2be4d.firebaseapp.com",
-  projectId: "workoutpartner-2be4d",
-  storageBucket: "workoutpartner-2be4d.appspot.com",
-  messagingSenderId: "564734617592",
-  appId: "1:564734617592:web:c5f3e1b3c19efd41db180d",
-  measurementId: "G-L2PX1JRHRJ",
+  //Get the config from Firebase website.
 };
 
 const fireBaseApp = initializeApp(firebaseConfig);
@@ -33,9 +28,19 @@ async function query() {
   return excercieses;
 }
 
+async function add() {
+  await addDoc(collection(db, "excercise"), {
+    bodyPart: "leg",
+    name: "dead lift",
+    repetition: 8,
+    weight: 70,
+  });
+}
+
 function App() {
   useEffect(() => {
     query();
+    //add();
   });
 
   return (
